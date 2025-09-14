@@ -11,7 +11,7 @@ const Skills = () => {
     {
       title: "Programming Languages",
       icon: FaCode,
-      color: "primary",
+      gradient: "gradient-primary",
       skills: [
         { name: "C++", level: 90, years: "2+ years" },
         { name: "C", level: 85, years: "2+ years" },
@@ -22,7 +22,7 @@ const Skills = () => {
     {
       title: "Database & Tools",
       icon: FaDatabase,
-      color: "secondary",
+      gradient: "gradient-secondary",
       skills: [
         { name: "SQL", level: 85, years: "1+ year" },
         { name: "MySQL", level: 80, years: "1+ year" },
@@ -33,7 +33,7 @@ const Skills = () => {
     {
       title: "Development Tools",
       icon: FaTools,
-      color: "accent",
+      gradient: "gradient-primary",
       skills: [
         { name: "Git/GitHub", level: 85, years: "2+ years" },
         { name: "VS Code", level: 90, years: "2+ years" },
@@ -44,7 +44,7 @@ const Skills = () => {
     {
       title: "CS Fundamentals",
       icon: FaBrain,
-      color: "primary",
+      gradient: "gradient-secondary",
       skills: [
         { name: "Data Structures & Algorithms", level: 80, years: "2+ years" },
         { name: "Object-Oriented Programming", level: 85, years: "2+ years" },
@@ -55,7 +55,7 @@ const Skills = () => {
     {
       title: "AI & Modern Tools",
       icon: FaBrain,
-      color: "secondary",
+      gradient: "gradient-primary",
       skills: [
         { name: "Machine Learning", level: 75, years: "1 year" },
         { name: "OCR (EasyOCR)", level: 70, years: "6 months" },
@@ -66,7 +66,7 @@ const Skills = () => {
     {
       title: "Soft Skills",
       icon: FaComments,
-      color: "accent",
+      gradient: "gradient-secondary",
       skills: [
         { name: "Presentation Skills", level: 90, years: "2+ years" },
         { name: "Communication", level: 85, years: "3+ years" },
@@ -87,28 +87,23 @@ const Skills = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
-  };
-
-  const progressVariants = {
-    hidden: { width: "0%" },
-    visible: { width: "100%", transition: { duration: 1, ease: "easeOut" } }
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
   return (
-    <section id="skills" className="py-20 bg-card/5" ref={ref}>
-      <div className="container mx-auto px-4">
+    <section id="skills" className="py-24" ref={ref}>
+      <div className="container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold hero-gradient bg-clip-text text-transparent mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold gradient-primary bg-clip-text text-transparent mb-6">
             Skills & Expertise
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Technical proficiencies and soft skills developed through hands-on experience and continuous learning
           </p>
         </motion.div>
@@ -117,37 +112,40 @@ const Skills = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
         >
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={categoryIndex}
               variants={itemVariants}
-              className="bg-card p-6 rounded-lg card-glow"
+              whileHover={{ y: -5 }}
+              className="bg-card p-8 rounded-3xl shadow-secondary border border-border/50 hover:shadow-primary transition-all duration-500"
             >
-              <div className="flex items-center mb-6">
-                <div className={`p-3 rounded-lg bg-${category.color}/10 mr-4`}>
-                  <category.icon className={`text-${category.color} text-xl`} />
+              <div className="flex items-center mb-8">
+                <div className={`p-4 ${category.gradient} rounded-2xl mr-4 shadow-secondary`}>
+                  <category.icon className="text-white text-2xl" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">{category.title}</h3>
+                <h3 className="font-display text-xl font-bold text-foreground">{category.title}</h3>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {category.skills.map((skill, skillIndex) => (
                   <div key={skillIndex}>
-                    <div className="flex justify-between items-center mb-2">
+                    <div className="flex justify-between items-center mb-3">
                       <span className="font-medium text-foreground">{skill.name}</span>
-                      <span className="text-xs text-muted-foreground">{skill.years}</span>
+                      <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                        {skill.years}
+                      </span>
                     </div>
-                    <div className="relative h-2 bg-border rounded-full overflow-hidden">
+                    <div className="relative h-3 bg-muted rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: "0%" }}
                         animate={isInView ? { width: `${skill.level}%` } : { width: "0%" }}
-                        transition={{ duration: 1, ease: "easeOut", delay: skillIndex * 0.1 }}
-                        className={`absolute top-0 left-0 h-full bg-gradient-to-r from-${category.color} to-${category.color}/70 rounded-full`}
+                        transition={{ duration: 1.2, ease: "easeOut", delay: categoryIndex * 0.1 + skillIndex * 0.1 }}
+                        className={`absolute top-0 left-0 h-full ${category.gradient} rounded-full shadow-sm`}
                       />
                     </div>
-                    <div className="text-xs text-muted-foreground mt-1">
+                    <div className="text-xs text-muted-foreground mt-2 text-right">
                       {skill.level}% proficiency
                     </div>
                   </div>
@@ -159,25 +157,35 @@ const Skills = () => {
 
         {/* Certifications */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          className="mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="max-w-4xl mx-auto"
         >
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-foreground mb-2 flex items-center justify-center">
+          <div className="text-center mb-12">
+            <h3 className="font-display text-3xl font-bold text-foreground mb-4 flex items-center justify-center">
               <FaCertificate className="text-accent mr-3" />
               Certifications
             </h3>
+            <p className="text-muted-foreground">Professional certifications and continuous learning achievements</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-card p-4 rounded-lg card-glow">
-              <h4 className="font-semibold text-primary">NPTEL Certifications</h4>
-              <p className="text-sm text-muted-foreground">Discrete Mathematics • Programming in Java</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-card p-6 rounded-2xl shadow-secondary border border-border/50 hover:shadow-primary transition-all duration-300">
+              <h4 className="font-display font-bold text-primary text-lg mb-2">NPTEL Certifications</h4>
+              <p className="text-muted-foreground mb-4">Advanced courses with excellent performance</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium">Discrete Mathematics</span>
+                <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium">Programming in Java</span>
+              </div>
             </div>
-            <div className="bg-card p-4 rounded-lg card-glow">
-              <h4 className="font-semibold text-secondary">Coursera Certifications</h4>
-              <p className="text-sm text-muted-foreground">Database Management • DSA • App Development</p>
+            <div className="bg-card p-6 rounded-2xl shadow-secondary border border-border/50 hover:shadow-primary transition-all duration-300">
+              <h4 className="font-display font-bold text-accent text-lg mb-2">Coursera Certifications</h4>
+              <p className="text-muted-foreground mb-4">Industry-recognized specializations</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium">Database Management</span>
+                <span className="bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium">DSA</span>
+                <span className="bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-medium">App Development</span>
+              </div>
             </div>
           </div>
         </motion.div>

@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
-import projectsBg from '../assets/projects-bg.jpg';
+import { FaExternalLinkAlt, FaGithub, FaStar } from 'react-icons/fa';
 
 const Projects = () => {
   const ref = useRef(null);
@@ -20,7 +19,8 @@ const Projects = () => {
         "Research paper in progress"
       ],
       link: "#",
-      featured: true
+      featured: true,
+      gradient: "gradient-primary"
     },
     {
       title: "Food Label Allergy Detector",
@@ -32,7 +32,8 @@ const Projects = () => {
         "Machine learning classification",
         "User-friendly interface"
       ],
-      link: "#"
+      link: "#",
+      gradient: "gradient-secondary"
     },
     {
       title: "SmartGrocer App",
@@ -44,7 +45,8 @@ const Projects = () => {
         "Smart budget tracking",
         "Expiry and low-stock alerts"
       ],
-      link: "#"
+      link: "#",
+      gradient: "gradient-primary"
     },
     {
       title: "Custom Database in C++",
@@ -56,7 +58,8 @@ const Projects = () => {
         "CRUD operations support",
         "Performance optimization"
       ],
-      link: "#"
+      link: "#",
+      gradient: "gradient-secondary"
     }
   ];
 
@@ -71,29 +74,23 @@ const Projects = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
   return (
-    <section id="projects" className="py-20 relative" ref={ref}>
-      {/* Background overlay */}
-      <div className="absolute inset-0 opacity-5">
-        <img src={projectsBg} alt="" className="w-full h-full object-cover" />
-      </div>
-      <div className="absolute inset-0 bg-background/60"></div>
-      
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="projects" className="py-24 bg-muted/30" ref={ref}>
+      <div className="container mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold hero-gradient bg-clip-text text-transparent mb-4">
-            Projects
+          <h2 className="font-display text-4xl md:text-5xl font-bold gradient-primary bg-clip-text text-transparent mb-6">
+            Featured Projects
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Innovative solutions in AI, Android development, and sustainable technology
           </p>
         </motion.div>
@@ -102,68 +99,79 @@ const Projects = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
         >
           {projects.map((project, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
-              className={`bg-card p-6 rounded-lg card-glow transition-all duration-300 ${
+              whileHover={{ y: -10 }}
+              className={`group relative ${
                 project.featured ? 'lg:col-span-2' : ''
               }`}
             >
-              <div className={`${project.featured ? 'md:flex md:space-x-6' : ''}`}>
-                <div className={`${project.featured ? 'md:flex-1' : ''}`}>
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-xl font-bold text-foreground">{project.title}</h3>
-                    <div className="flex space-x-2">
-                      <motion.a
-                        href={project.link}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="text-primary hover:text-primary/80 transition-colors"
-                        aria-label="View project"
-                      >
-                        <FaExternalLinkAlt />
-                      </motion.a>
-                      <motion.a
-                        href={project.link}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="text-secondary hover:text-secondary/80 transition-colors"
-                        aria-label="View source code"
-                      >
-                        <FaGithub />
-                      </motion.a>
+              <div className="bg-card p-8 rounded-3xl shadow-secondary border border-border/50 group-hover:shadow-primary transition-all duration-500 h-full">
+                {project.featured && (
+                  <div className="flex items-center mb-4">
+                    <FaStar className="text-yellow-500 mr-2" />
+                    <span className="text-sm font-medium text-muted-foreground">Featured Project</span>
+                  </div>
+                )}
+
+                <div className={`${project.featured ? 'md:flex md:space-x-8' : ''}`}>
+                  <div className={`${project.featured ? 'md:flex-1' : ''}`}>
+                    <div className="flex items-start justify-between mb-6">
+                      <h3 className="font-display text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      <div className="flex space-x-3 opacity-60 group-hover:opacity-100 transition-opacity">
+                        <motion.a
+                          href={project.link}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="p-2 bg-background rounded-lg hover:bg-primary hover:text-white transition-colors"
+                          aria-label="View project"
+                        >
+                          <FaExternalLinkAlt className="text-sm" />
+                        </motion.a>
+                        <motion.a
+                          href={project.link}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="p-2 bg-background rounded-lg hover:bg-primary hover:text-white transition-colors"
+                          aria-label="View source code"
+                        >
+                          <FaGithub className="text-sm" />
+                        </motion.a>
+                      </div>
+                    </div>
+                    
+                    <p className="text-muted-foreground mb-6 leading-relaxed">{project.description}</p>
+                    
+                    <div className="mb-6">
+                      <h4 className="font-semibold text-foreground mb-3">Key Achievements:</h4>
+                      <div className="space-y-2">
+                        {project.achievements.map((achievement, i) => (
+                          <div key={i} className="flex items-start space-x-3">
+                            <div className={`w-2 h-2 rounded-full ${project.gradient} mt-2 flex-shrink-0`}></div>
+                            <span className="text-sm text-muted-foreground leading-relaxed">{achievement}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                   
-                  <p className="text-muted-foreground mb-4">{project.description}</p>
-                  
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-foreground mb-2">Key Achievements:</h4>
-                    <ul className="space-y-1">
-                      {project.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-start space-x-2">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                          <span className="text-sm text-muted-foreground">{achievement}</span>
-                        </li>
+                  <div className={`${project.featured ? 'md:flex-1' : ''}`}>
+                    <div className="flex flex-wrap gap-2">
+                      {project.techStack.map((tech, i) => (
+                        <span
+                          key={i}
+                          className="bg-background text-foreground px-3 py-2 rounded-full text-xs font-medium border border-border/30 hover:border-primary/50 transition-colors"
+                        >
+                          {tech}
+                        </span>
                       ))}
-                    </ul>
-                  </div>
-                </div>
-                
-                <div className={`${project.featured ? 'md:flex-1' : ''}`}>
-                  <div className="flex flex-wrap gap-2">
-                    {project.techStack.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                    </div>
                   </div>
                 </div>
               </div>
