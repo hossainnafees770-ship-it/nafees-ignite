@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaGraduationCap, FaAward } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaEnvelope, FaGraduationCap } from 'react-icons/fa';
 import aboutBg from '../assets/about-bg.jpg';
 
 const About = () => {
@@ -50,14 +50,15 @@ const About = () => {
           <motion.div variants={itemVariants} className="space-y-8">
             <div className="prose prose-lg max-w-none">
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                I'm a passionate B.Tech Information Technology student at the Institute of Engineering 
-                and Management, Kolkata, currently in my 3rd year with an SGPA of 8.4. As a Junior 
-                Researcher at IIFR Lab, I work on cutting-edge V2V charging platforms and innovative 
-                EV technologies.
+                I'm a passionate B.Tech Information Technology student currently in my 3rd year with 
+                an SGPA of 8.4. My focus is on programming and software development, with expertise 
+                in C++, Python, and system design. I enjoy solving complex algorithmic problems and 
+                building innovative software solutions.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                My journey in technology is driven by a desire to solve real-world problems through 
-                innovative solutions, particularly in sustainable technology and artificial intelligence.
+                My programming journey started with C++ and has expanded to include database systems, 
+                machine learning, and mobile app development. I'm constantly learning new technologies 
+                and applying them to real-world projects.
               </p>
             </div>
 
@@ -68,42 +69,35 @@ const About = () => {
                     <FaGraduationCap className="text-white text-xl" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">Education</h4>
+                    <h4 className="font-semibold text-foreground">College</h4>
                     <p className="text-sm text-muted-foreground">B.Tech IT • SGPA: 8.4</p>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground">IEM Kolkata (2023-2027)</p>
+                <p className="text-sm text-muted-foreground">Institute of Engineering & Management, Kolkata (2023-2027)</p>
               </div>
 
               <div className="bg-card p-6 rounded-2xl shadow-secondary border border-border/50">
                 <div className="flex items-center mb-4">
                   <div className="p-3 gradient-secondary rounded-xl mr-4">
-                    <FaAward className="text-white text-xl" />
+                    <FaGraduationCap className="text-white text-xl" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground">IEEE Award</h4>
-                    <p className="text-sm text-muted-foreground">$2,217 Funding</p>
+                    <h4 className="font-semibold text-foreground">School</h4>
+                    <p className="text-sm text-muted-foreground">Higher Secondary (84.14%)</p>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground">Smart Village Winner 2024</p>
+                <p className="text-sm text-muted-foreground">Bagnan High School (2014-2022)</p>
               </div>
             </div>
 
             <div className="space-y-4">
               <h3 className="font-display text-2xl font-semibold text-foreground">Contact Information</h3>
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-center space-x-4 p-4 bg-card/50 rounded-xl border border-border/30">
                   <FaMapMarkerAlt className="text-primary flex-shrink-0" />
                   <div>
                     <p className="font-medium text-foreground">Location</p>
-                    <p className="text-sm text-muted-foreground">Howrah, West Bengal, India</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4 p-4 bg-card/50 rounded-xl border border-border/30">
-                  <FaPhone className="text-primary flex-shrink-0" />
-                  <div>
-                    <p className="font-medium text-foreground">Phone</p>
-                    <p className="text-sm text-muted-foreground">+91 9564289091</p>
+                    <p className="text-sm text-muted-foreground">Howrah, West Bengal</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4 p-4 bg-card/50 rounded-xl border border-border/30">

@@ -1,9 +1,132 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { useForm } from 'react-hook-form';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle } from 'react-icons/fa';
-import { useToast } from '@/hooks/use-toast';
+import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
+
+const Contact = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const contactLinks = [
+    {
+      icon: FaEnvelope,
+      title: 'Email',
+      value: 'hossainnafees587@gmail.com',
+      href: 'mailto:hossainnafees587@gmail.com',
+      gradient: 'gradient-primary'
+    },
+    {
+      icon: FaLinkedin,
+      title: 'LinkedIn',
+      value: 'Connect with me',
+      href: 'https://linkedin.com/in/nafeeshossain',
+      gradient: 'gradient-secondary'
+    },
+    {
+      icon: FaGithub,
+      title: 'GitHub',
+      value: 'View my projects',
+      href: 'https://github.com/nafeeshossain',
+      gradient: 'gradient-primary'
+    },
+    {
+      icon: SiLeetcode,
+      title: 'LeetCode',
+      value: 'See my solutions',
+      href: 'https://leetcode.com/nafeeshossain',
+      gradient: 'gradient-secondary'
+    }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+
+  return (
+    <section id="contact" className="py-16" ref={ref}>
+      <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="font-display text-4xl md:text-5xl font-bold gradient-primary bg-clip-text text-transparent mb-6">
+            Get In Touch
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Let's connect and discuss opportunities, projects, or just have a chat about technology.
+          </p>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {contactLinks.map((contact, index) => (
+              <motion.a
+                key={index}
+                href={contact.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={itemVariants}
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="group"
+              >
+                <div className="flex items-center space-x-6 p-6 bg-card rounded-2xl shadow-secondary border border-border/50 group-hover:shadow-primary transition-all duration-500">
+                  <div className={`p-4 ${contact.gradient} rounded-2xl shadow-secondary group-hover:scale-110 transition-transform duration-300`}>
+                    <contact.icon className="text-white text-2xl" />
+                  </div>
+                  <div>
+                    <h4 className="font-display font-bold text-foreground text-lg group-hover:text-primary transition-colors">
+                      {contact.title}
+                    </h4>
+                    <p className="text-muted-foreground group-hover:text-primary transition-colors leading-relaxed">
+                      {contact.value}
+                    </p>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+
+          <motion.div
+            variants={itemVariants}
+            className="text-center mt-12"
+          >
+            <div className="bg-card p-8 rounded-3xl shadow-secondary border border-border/50 max-w-2xl mx-auto">
+              <h3 className="font-display text-2xl font-bold text-foreground mb-4">
+                Let's Build Something Great
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                I'm always interested in discussing new opportunities, innovative projects, 
+                and collaborations. Whether you're looking for a developer or just want to 
+                connect, feel free to reach out through any of the channels above.
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default Contact;
 
 interface ContactFormData {
   name: string;

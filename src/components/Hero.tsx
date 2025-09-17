@@ -29,7 +29,7 @@ const Hero = () => {
             <div className="absolute inset-0 gradient-primary rounded-full blur-xl opacity-30 animate-pulse"></div>
             <img
               src={profileImage}
-              alt="Khandakar Nafees Hossain"
+              alt="Nafees Hossain"
               className="relative w-56 h-56 md:w-64 md:h-64 rounded-full mx-auto object-cover shadow-accent border-4 border-white/20 transition-transform duration-500 hover:scale-105"
             />
           </div>
@@ -43,18 +43,14 @@ const Hero = () => {
         >
           <h1 className="font-display text-5xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="gradient-primary bg-clip-text text-transparent">
-              Khandakar Nafees
+              Nafees
             </span>
             <br />
             <span className="text-foreground">Hossain</span>
           </h1>
 
-          <p className="text-2xl md:text-3xl text-muted-foreground mb-4 font-light">
-            Software Engineer & Innovator
-          </p>
-
-          <p className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-            B.Tech IT Student at IEM Kolkata • IEEE Award Winner • AI & EV Technology Enthusiast
+          <p className="text-2xl md:text-3xl text-muted-foreground mb-12 font-light">
+            IT Student
           </p>
         </motion.div>
 
